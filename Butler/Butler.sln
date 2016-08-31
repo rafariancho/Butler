@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{61AF09E3-B21F-4D49-A32C-2F4A45761F86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89FEAF9F-899B-464A-9AFB-63BFE525B922}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Butler", "src\Butler\Butler.xproj", "{FFBAE847-7081-4415-960C-15D9F1BDA8C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E33CA3F4-7F51-482D-9E5E-618ECADF23A5}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ButlerTests", "test\ButlerTests\ButlerTests.xproj", "{3B0FE051-E344-41CA-A2B7-7E7359E35634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFBAE847-7081-4415-960C-15D9F1BDA8C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFBAE847-7081-4415-960C-15D9F1BDA8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFBAE847-7081-4415-960C-15D9F1BDA8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFBAE847-7081-4415-960C-15D9F1BDA8C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B0FE051-E344-41CA-A2B7-7E7359E35634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0FE051-E344-41CA-A2B7-7E7359E35634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0FE051-E344-41CA-A2B7-7E7359E35634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0FE051-E344-41CA-A2B7-7E7359E35634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFBAE847-7081-4415-960C-15D9F1BDA8C1} = {61AF09E3-B21F-4D49-A32C-2F4A45761F86}
+		{3B0FE051-E344-41CA-A2B7-7E7359E35634} = {E33CA3F4-7F51-482D-9E5E-618ECADF23A5}
+	EndGlobalSection
+EndGlobal
