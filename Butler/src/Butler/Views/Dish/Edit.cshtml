@@ -1,6 +1,6 @@
 ﻿@model Butler.ViewModels.DishViewModel
 
-<form asp-controller="Dish" asp-action="Edit" method="post" enctype="multipart/form-data">
+<form id="dishForm" asp-controller="Dish" asp-action="Edit" method="post" enctype="multipart/form-data">
     <div class="media col-lg-4">
         <div class="media-left">
             <a href="#">
@@ -65,6 +65,6 @@
 
     $("#Image").change(function () {
         readURL(this);
-    });
+    });    
 </script>
 }
