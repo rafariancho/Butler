@@ -5,10 +5,10 @@
         <div class="media-left">
             <a href="#">
                 @if( Model.ImageSrc == null) {
-                    <img class="media-object" src="http://placehold.it/348x256">
+                    <img id="imgDish" class="media-object" src="http://placehold.it/348x256" width="349" height="256">
                 }
                 else { 
-                    <img class="media-object" src="@Model.ImageSrc" width="348" height="256">
+                    <img id="imgDish" class="media-object" src="@Model.ImageSrc" width="349" height="256">
                 }
             </a>
         </div>
@@ -48,6 +48,22 @@
 				buttonName : 'btn-default',
 				buttonText: 'Select an image',
 				iconName: 'glyphicon glyphicon-picture'
-			});
+    });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgDish').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#Image").change(function () {
+        readURL(this);
+    });
 </script>
 }
