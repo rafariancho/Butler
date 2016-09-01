@@ -20,7 +20,10 @@ namespace Butler.ViewModels
         [Required]
         public int Type { get; set; }
         [Required]
-        public int Consistency { get; set; } 
+        public int Consistency { get; set; }
+        [Required]
+        [StringLength(1000, MinimumLength = 20, ErrorMessage = "Preparation method must be 20 to 1000 characters long")]
+        public string Description { get; set; }
         public IFormFile Image { get; set; }
         public string ImageSrc { get; set; }
     }
