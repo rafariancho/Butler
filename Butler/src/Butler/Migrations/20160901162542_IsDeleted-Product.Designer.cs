@@ -8,9 +8,10 @@ using Butler.Models;
 namespace Butler.Migrations
 {
     [DbContext(typeof(ButlerContext))]
-    partial class ButlerContextModelSnapshot : ModelSnapshot
+    [Migration("20160901162542_IsDeleted-Product")]
+    partial class IsDeletedProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

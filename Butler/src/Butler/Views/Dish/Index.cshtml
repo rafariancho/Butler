@@ -1,1 +1,7 @@
-﻿<a asp-area="" asp-controller="Dish" asp-action="Edit" >New dish</a>
+﻿@model IEnumerable<Butler.Models.Dish>
+<a asp-area="" asp-controller="Dish" asp-action="Edit" >New dish</a>
+
+@foreach (var dish in Model) {
+
+    <div>@dish.Name</div>
+ }

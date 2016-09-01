@@ -40,10 +40,12 @@ namespace Butler
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ButlerDb;Trusted_Connection=True;";
-            services.AddDbContext<ButlerContext>(options => options.UseSqlServer(connection));
+            //var connection = @"Server=(localdb)\mssqllocaldb;Database=ButlerDb;Trusted_Connection=True;";
+            //services.AddDbContext<ButlerContext>(options => options.UseSqlServer(connection));            
+            services.AddDbContext<ButlerContext>(options => options.UseSqlServer(Configuration["database:connection"]));
             services.AddMvc();
             services.AddScoped<IWeeklyMenuFactory, FakeWeeklyMenuFactory>();
+            services.AddScoped<IRepository, Repositories.Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

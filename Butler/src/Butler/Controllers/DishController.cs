@@ -7,6 +7,7 @@ using Butler.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Butler.Interfaces;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,13 +16,17 @@ namespace Butler.Controllers
     public class DishController : Controller
     {
         private IHostingEnvironment _environment;
+        private IRepository _repository;
 
-        public DishController(IHostingEnvironment environment)
+        public DishController(IHostingEnvironment environment, IRepository repository)
         {
             _environment = environment;
+            _repository = repository;
         }
 
-        public IActionResult Index() { return View(); }
+        public IActionResult Index() {
+            return View(_repository.GetDishes());
+        }
                 
         public IActionResult Edit()
         {

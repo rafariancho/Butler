@@ -10,6 +10,8 @@ namespace Butler.Models
     {
         public ButlerContext(DbContextOptions<ButlerContext> options): base(options)
         {}
-        public DbSet<Dish> Dishes { get; set; }        
+        public DbSet<Dish> Dishes { get; set; }   
+        public DbSet<Product> Products { get; set; }   
+        public DbSet<Ingredient> Ingredients { get; set; }    
     }
 }
