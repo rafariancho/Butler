@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Butler.Interfaces;
 using Butler.Factories;
+using Butler.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Butler
 {
@@ -38,6 +40,8 @@ namespace Butler
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
 
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=ButlerDb;Trusted_Connection=True;";
+            services.AddDbContext<ButlerContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             services.AddScoped<IWeeklyMenuFactory, FakeWeeklyMenuFactory>();
         }
@@ -70,6 +74,8 @@ namespace Butler
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.Initialize(app.ApplicationServices);
         }
     }
 }

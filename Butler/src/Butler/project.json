@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
+    //"NETStandard.Library": "1.6.0",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
@@ -22,9 +22,17 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "Microsoft.EntityFrameworkCore": "1.0.0",
     "BundlerMinifier.Core": "2.2.281",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0"
+    "Microsoft.EntityFrameworkCore": "1.0.0",
+    "Microsoft.EntityFrameworkCore.Design": {
+      "type": "build",
+      "version": "1.0.0-preview2-final"
+    },
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
+    "Microsoft.EntityFrameworkCore.Tools": {
+      "version": "1.0.0-preview2-final",
+      "type": "build"
+    }
   },
 
   "tools": {
@@ -34,37 +42,37 @@
   },
 
   "frameworks": {
-      "netcoreapp1.0": {
-        "imports": [
-          "dotnet5.4",
-          "portable-win81+wpa81"
-        ]
-      }
-    },
-
-    "buildOptions": {
-      "emitEntryPoint": true,
-      "preserveCompilationContext": true
-    },
-
-    "runtimeOptions": {
-      "configProperties": {
-        "System.GC.Server": true
-      }
-    },
-
-    "publishOptions": {
-      "include": [
-        "wwwroot",
-        "Views",
-        "Areas/**/Views",
-        "appsettings.json",
-        "web.config"
+    "netcoreapp1.0": {
+      "imports": [
+        "dnxcore50",
+        "portable-win81+wpa81"
       ]
-    },
-
-    "scripts": {
-      "prepublish": [ "bower install", "dotnet bundle" ],
-      "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
     }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
+  },
+
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "Views",
+      "Areas/**/Views",
+      "appsettings.json",
+      "web.config"
+    ]
+  },
+
+  "scripts": {
+    "prepublish": [ "bower install", "dotnet bundle" ],
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
+}
