@@ -1,22 +1,25 @@
 ﻿@model Butler.ViewModels.DishViewModel
 
-<form asp-controller="Dish" asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div class="media col-lg-4">
+<form id="dishForm" asp-controller="Dish" asp-action="Edit" class="row" method="post" enctype="multipart/form-data">
+    <div class="media col-md-4 col-sm-12">
         <div class="media-left">
             <a href="#">
-                @if( Model.ImageSrc == null) {
-                    <img class="media-object" src="http://placehold.it/348x256">
+                @if (Model.ImageSrc == null)
+                {
+                    <img id="imgDish" class="media-object" src="http://placehold.it/345x256" width="345" height="256">
                 }
-                else { 
-                    <img class="media-object" src="@Model.ImageSrc" width="348" height="256">
+                else
+                {
+                    <img id="imgDish" class="media-object" src="@Model.ImageSrc" width="345" height="256">
                 }
             </a>
         </div>
-        <div class="form-group">
-            <input type="file" id="Image" name="Image">
+        <div class="input-group input-take-all-space">
+            <input class="form-control" type="file" id="Image" name="Image">
+            <input type="hidden" name="ImageSrc" value="@Model.ImageSrc" />
         </div>
     </div>
-    <div class="media col-lg-8">
+    <div class="col-md-4 col-sm-12">
         <div class="form-group">
             <label for="Name">Name</label>
             <input id="Name" class="form-control" type="text" name="name" value="@Model.Name" />
@@ -34,11 +37,20 @@
             <label for="Type">Type</label>
             <select id="Type" class="form-control" asp-for="Type" asp-items="@Model.DishTypes"></select>
         </div>
+    </div>
+    <div class="col-md-4">
         <div class="form-group">
             <label for="Consistency">Consistency</label>
             <select id="Consistency" class="form-control" asp-for="Consistency" asp-items="@Model.ConsistencyTypes"></select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <label for="textArea">Preparation method</label>
+            <textarea class="form-control" name="Description" rows="5" id="textArea">@Model.Description</textarea>
+            <span class="help-block">Enter the ingredients and how the preparation method.</span>
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
     </div>
 </form>
 
@@ -48,6 +60,22 @@
 				buttonName : 'btn-default',
 				buttonText: 'Select an image',
 				iconName: 'glyphicon glyphicon-picture'
-			});
+    });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgDish').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#Image").change(function () {
+        readURL(this);
+    });    
 </script>
 }

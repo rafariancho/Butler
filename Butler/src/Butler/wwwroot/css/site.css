@@ -14,7 +14,13 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 90%;
+}
+
+.input-take-all-space input,
+.input-take-all-space select,
+.input-take-all-space textarea {
+    max-width: 282px;
 }
 
 /* Carousel */
