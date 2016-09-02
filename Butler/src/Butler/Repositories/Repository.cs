@@ -56,6 +56,21 @@ namespace Butler.Repositories
            return _context.Dishes;
         }
 
+        public IEnumerable<Dish> GetDishes(int start, int pagesize)
+        {
+            return _context.Dishes.Skip(start).Take(pagesize);
+        }
+
+        public IEnumerable<Dish> GetDishes(string search, int start, int pagesize)
+        {
+            return _context.Dishes.Where(x => x.Name.Contains(search)).Skip(start).Take(pagesize);
+        }
+
+        public int GetDishesCount()
+        {
+            return _context.Dishes.Count();
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products;
@@ -68,12 +83,12 @@ namespace Butler.Repositories
 
         public void UpdateIngredient(Ingredient ingredient)
         {
-            throw new NotImplementedException();
+            _context.Entry(ingredient).State = EntityState.Modified;
         }
 
         public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            _context.Entry(product).State = EntityState.Modified;
         }
 
         public void Save()
@@ -103,6 +118,7 @@ namespace Butler.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         #endregion
 
     }

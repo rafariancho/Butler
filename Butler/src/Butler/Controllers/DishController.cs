@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Butler.ViewModels;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using System.IO;
 using Butler.Interfaces;
+using System;
+using DataTables.AspNet.Core;
+using System.Linq;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,9 +25,29 @@ namespace Butler.Controllers
         }
 
         public IActionResult Index() {
-            return View(_repository.GetDishes());
+            return View();
         }
-                
+
+        [HttpPost]
+        public JsonResult Returndata(DataTableParameters request)
+        {           
+            var filteredData = String.IsNullOrWhiteSpace(request.Search?.Value)
+                ? _repository.GetDishes(request.Start, request.Length)
+                : _repository.GetDishes(request.Search.Value, request.Start, request.Length);
+            
+                switch (request.Order[0]?.Column)
+                {
+                    case 1:
+                        filteredData = request.Order[0]?.Dir == "asc"? filteredData.OrderBy(x => x.Name): filteredData.OrderByDescending(x => x.Name); break;
+                    case 2:
+                        filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Tuppers) : filteredData.OrderByDescending(x => x.Tuppers); break;
+                default:
+                        break;
+                }                
+
+            return Json(new DataTablesResponse(request.Draw, filteredData, filteredData.Count(), _repository.GetDishesCount()));
+        }
+
         public IActionResult Edit()
         {
             DishViewModel model = new ViewModels.DishViewModel();
@@ -35,7 +55,7 @@ namespace Butler.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Edit(DishViewModel model)
         {
             if (ModelState.IsValid)

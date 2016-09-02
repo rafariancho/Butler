@@ -54,6 +54,9 @@
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/bootstrap-filestyle/src/bootstrap-filestyle.js"></script>
+        <link href="~/lib/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet" />
+        <script src="~/lib/datatables/media/js/jquery.dataTables.js"></script>
+        <script src="~/lib/datatables/media/js/dataTables.bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
@@ -68,6 +71,13 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="~/lib/bootstrap-filestyle/src/bootstrap-filestyle.min.js"></script>
+        <link href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css"
+                asp-fallback-href="~/lib/datatables/media/css/dataTables.bootstrap.css" rel="stylesheet">
+        <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" 
+                asp-fallback-src="~/lib/datatables/media/js/jquery.dataTables.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"
+                asp-fallback-src="~/lib/datatables/media/js/dataTables.bootstrap.min.js">
+        </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

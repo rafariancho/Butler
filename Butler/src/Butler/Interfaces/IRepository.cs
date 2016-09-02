@@ -9,6 +9,9 @@ namespace Butler.Interfaces
     public interface IRepository : IDisposable
     {
         IEnumerable<Dish> GetDishes();
+        IEnumerable<Dish> GetDishes(int start, int pagesize);
+        IEnumerable<Dish> GetDishes(string search, int start, int pagesize);
+        int GetDishesCount();
         IEnumerable<Product> GetProducts();
         void AddDish(Dish dish);
         void UpdateDish(Dish dish);

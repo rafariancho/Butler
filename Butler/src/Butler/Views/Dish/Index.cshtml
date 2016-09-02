@@ -1,7 +1,56 @@
 ﻿@model IEnumerable<Butler.Models.Dish>
-<a asp-area="" asp-controller="Dish" asp-action="Edit" >New dish</a>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1 col-sm-6">
+        <a asp-area="" asp-controller="Dish" asp-action="Edit" class="btn btn-primary">New dish</a>
+    </div>
+    <div class="col-md-10 col-md-offset-1 col-sm-10 top-spaced">
+        <table id="DishesTable" class="table table-striped" cellspacing="0" width="100%">
+            <thead class="bg-primary">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Tuppers</th>
+                    <th>Type</th>
+                    <th>Consistency</th>
+                </tr>
+            </thead>
+            <tbody>            
+                <tr>
+                    <td><a></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                $('#DishesTable').dataTable({
+                    "dom": "frtip",
+                    responsive: true,
+                    serverSide: true,
+                    ajax: "/Dish/Returndata",
+                    "sServerMethod": "POST",
+                    "sAjaxDataProp": "filteredData",
+                    "aoColumnDefs": [{
+                        "aTargets": [0],
+                        "mData": "id",
+                        "mRender": function (data, type, full) {
+                            return '<a href="/Dish/Edit/' + data + '">Edit</a>';
+                        }
+                    }],
+                    "aoColumns": [
+                                    { "mData": "id" }, 
+                                    { "mData": "name" },
+                                    { "mData": "tuppers" },
+                                    { "mData": "type" },
+                                    { "mData": "consistency" }
+                                ]
+                });
+            });
+        </script>
 
-@foreach (var dish in Model) {
-
-    <div>@dish.Name</div>
- }
+    }
