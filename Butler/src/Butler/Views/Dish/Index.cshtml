@@ -1,1 +1,75 @@
-﻿<a asp-area="" asp-controller="Dish" asp-action="Edit" >New dish</a>
+﻿@model IEnumerable<Butler.Models.Dish>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1 col-sm-6">
+        <a asp-area="" asp-controller="Dish" asp-action="Edit" class="btn btn-primary">New dish</a>
+    </div>
+    <div class="col-md-10 col-md-offset-1 col-sm-10 top-spaced">
+        <table id="DishesTable" class="table table-striped" cellspacing="0" width="100%">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="all text-center">Name</th>
+                    <th class="text-center">Tuppers</th>
+                    <th class="desktop text-center">Type</th>
+                    <th class="text-center">Consistency</th>
+                    <th class="all"></th>
+                </tr>
+            </thead>
+            <tbody>            
+                <tr>
+                    <td><a></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                $('#DishesTable').dataTable({
+                    "dom": "frtip",
+                    responsive: {
+                        details: {
+                            renderer: function (api, rowIdx, columns) {
+                                var data = $.map(columns, function (col, i) {
+                                    return col.hidden ?
+                                        '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                                            '<td>' + col.title + ':' + '</td> ' +
+                                            '<td>' + col.data + '</td>' +
+                                        '</tr>' :
+                                        '';
+                                }).join('');
+
+                                return data ?
+                                    $('<table/>').append(data) :
+                                    false;
+                            }
+                        }
+                    },
+                    serverSide: true,
+                    ajax: "/Dish/Returndata",
+                    "sServerMethod": "POST",
+                    "sAjaxDataProp": "filteredData",
+                    "aoColumnDefs": [{
+                        "aTargets": [4],
+                        "mData": "id",
+                        orderable: false,
+                        "mRender": function (data, type, full) {
+                            return '<a href="/Dish/Edit/' + data + '">Edit</a>';
+                            }
+                    }],
+                    "aoColumns": [                                     
+                                    { "mData": "name" },
+                                    { "mData": "tuppers" },
+                                    { "mData": "type" },
+                                    { "mData": "consistency" },
+                                    { "mData": "id" }
+                                ]
+                });
+            });
+        </script>
+
+    }
