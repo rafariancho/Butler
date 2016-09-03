@@ -12,9 +12,9 @@ namespace Butler.Models
         [Required]
         public int Tuppers { get; set; }
         [Required]
-        public int Type { get; set; }
+        public Type Type { get; set; }
         [Required]
-        public int Consistency { get; set; }
+        public Consistency Consistency { get; set; }
         [Required]
         [StringLength(1000, MinimumLength = 20, ErrorMessage = "Preparation method must be 20 to 1000 characters long")]
         public string Description { get; set; }

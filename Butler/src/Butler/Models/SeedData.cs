@@ -23,18 +23,18 @@ namespace Butler.Models
                      new Dish
                      {
                          Name = "Patatas con chorizo",
-                         Consistency = 1, //Heavy
+                         Consistency = Consistency.Heavy, 
                          Tuppers = 4,
-                         Type = 1, //Lunch
+                         Type = Type.Lunch, 
                          Description = "se mezcla todo y se le prende fuego."
                      },
 
                      new Dish
                      {
                          Name = "Ragú de ternera",
-                         Consistency = 1, //Heavy
+                         Consistency = Consistency.Heavy, 
                          Tuppers = 4,
-                         Type = 1, //Lunch
+                         Type = Type.Lunch, 
                          Description = "se mezcla todo y se le prende fuego. 'Veneno amasao'"
                      }
                 );

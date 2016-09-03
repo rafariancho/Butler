@@ -8,6 +8,8 @@ using Butler.Interfaces;
 using System;
 using DataTables.AspNet.Core;
 using System.Linq;
+using Butler.Extensions;
+using Butler.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,16 +36,17 @@ namespace Butler.Controllers
             var filteredData = String.IsNullOrWhiteSpace(request.Search?.Value)
                 ? _repository.GetDishes(request.Start, request.Length)
                 : _repository.GetDishes(request.Search.Value, request.Start, request.Length);
-            
-                switch (request.Order[0]?.Column)
-                {
-                    case 1:
-                        filteredData = request.Order[0]?.Dir == "asc"? filteredData.OrderBy(x => x.Name): filteredData.OrderByDescending(x => x.Name); break;
-                    case 2:
-                        filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Tuppers) : filteredData.OrderByDescending(x => x.Tuppers); break;
+
+            switch (request.Order[0]?.Column)
+            {
+                case 1:
+                    filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Name) : filteredData.OrderByDescending(x => x.Name); break;
+                case 2:
+                    filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Tuppers) : filteredData.OrderByDescending(x => x.Tuppers); break;
                 default:
-                        break;
-                }                
+                    filteredData = filteredData.OrderByDescending(x => x.Name);
+                    break;
+            }
 
             return Json(new DataTablesResponse(request.Draw, filteredData, filteredData.Count(), _repository.GetDishesCount()));
         }
@@ -51,7 +54,7 @@ namespace Butler.Controllers
         public IActionResult Edit()
         {
             DishViewModel model = new DishViewModel();
-            InitializeModel(model);
+            InitializeModel(model, Consistency.Normal, Models.Type.Lunch);
             return View(model);
         }
 
@@ -62,7 +65,7 @@ namespace Butler.Controllers
             var dish = _repository.GetDish(id);
             DishViewModel model = new DishViewModel();
             model.Map(dish);
-            InitializeModel(model);
+            InitializeModel(model, model.Consistency, model.Type);
             return View(model);
         }
 
@@ -83,24 +86,32 @@ namespace Butler.Controllers
                     }
                     model.ImageSrc = "/uploads/" + model.Image.FileName;
                 }
-                _repository.UpdateDish(model.MapTo(_repository.GetDish(model.Id)));
+
+                Dish dish = _repository.GetDish(model.Id);
+                if (dish != null) { 
+                    _repository.UpdateDish(model.MapTo(dish));                    
+                }else{
+                    _repository.AddDish(model.MapTo(new Dish()));
+                }
+
                 _repository.Save();
                 return RedirectToAction("Index");
             }
 
-            InitializeModel(model);
+            InitializeModel(model, model.Consistency, model.Type);
             return View(model);
         }
        
-        private static void InitializeModel(DishViewModel model)
+        private static void InitializeModel(DishViewModel model, Consistency consistency, Models.Type type )
         {
             model.DishTypes = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
-            model.DishTypes.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem() { Text = "Lunch", Value = "1" });
-            model.DishTypes.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem() { Text = "Dinner", Value = "2" });
             model.ConsistencyTypes = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
-            model.ConsistencyTypes.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem() { Text = "Heavy", Value = "1" });
-            model.ConsistencyTypes.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem() { Text = "Normal", Value = "2" });
-            model.ConsistencyTypes.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem() { Text = "Light", Value = "3" });
+
+            var types = EnumUtil.EnumToList<Models.Type>(Convert.ToInt32(type));
+            model.DishTypes.AddRange(types);
+
+            var consistencyTypes = EnumUtil.EnumToList<Models.Consistency>(Convert.ToInt32(consistency));
+            model.ConsistencyTypes.AddRange(consistencyTypes);
         }
     }
 }
