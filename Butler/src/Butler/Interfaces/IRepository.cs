@@ -11,6 +11,7 @@ namespace Butler.Interfaces
         IEnumerable<Dish> GetDishes();
         IEnumerable<Dish> GetDishes(int start, int pagesize);
         IEnumerable<Dish> GetDishes(string search, int start, int pagesize);
+        Dish GetDish(int id);
         int GetDishesCount();
         IEnumerable<Product> GetProducts();
         void AddDish(Dish dish);

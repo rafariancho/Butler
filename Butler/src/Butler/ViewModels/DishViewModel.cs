@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Butler.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,5 +27,24 @@ namespace Butler.ViewModels
         public string Description { get; set; }
         public IFormFile Image { get; set; }
         public string ImageSrc { get; set; }
+        public void Map(Dish dish) {
+            this.Id = dish.Id;
+            this.Name = dish.Name;
+            this.Tuppers = dish.Tuppers;
+            this.Type = dish.Type;
+            this.ImageSrc = dish.ImageSrc;
+            this.Description = dish.Description;
+            this.Consistency = dish.Consistency;
+        }
+        public Dish MapTo(Dish dish) {
+            dish.Id = this.Id;
+            dish.Name = this.Name;
+            dish.Tuppers = this.Tuppers;
+            dish.Type = this.Type;
+            dish.ImageSrc = this.ImageSrc;
+            dish.Description = this.Description;
+            dish.Consistency = this.Consistency;
+            return dish;
+        }
     }
 }

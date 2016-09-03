@@ -50,12 +50,23 @@ namespace Butler.Controllers
 
         public IActionResult Edit()
         {
-            DishViewModel model = new ViewModels.DishViewModel();
+            DishViewModel model = new DishViewModel();
             InitializeModel(model);
             return View(model);
         }
 
+        [Route("/Dish/Edit/{id}")]
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var dish = _repository.GetDish(id);
+            DishViewModel model = new DishViewModel();
+            model.Map(dish);
+            InitializeModel(model);
+            return View(model);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Edit(DishViewModel model)
         {
             if (ModelState.IsValid)
@@ -72,7 +83,11 @@ namespace Butler.Controllers
                     }
                     model.ImageSrc = "/uploads/" + model.Image.FileName;
                 }
+                _repository.UpdateDish(model.MapTo(_repository.GetDish(model.Id)));
+                _repository.Save();
+                return RedirectToAction("Index");
             }
+
             InitializeModel(model);
             return View(model);
         }

@@ -65,6 +65,11 @@ namespace Butler.Repositories
         {
             return _context.Dishes.Where(x => x.Name.Contains(search)).Skip(start).Take(pagesize);
         }
+        
+        public Dish GetDish(int id)
+        {
+            return _context.Dishes.Where(x => x.Id == id).FirstOrDefault();
+        }
 
         public int GetDishesCount()
         {
