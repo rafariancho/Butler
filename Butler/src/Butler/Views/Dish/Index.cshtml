@@ -7,6 +7,7 @@
         <table id="DishesTable" class="table table-striped" cellspacing="0" width="100%">
             <thead class="bg-primary">
                 <tr>
+                    <th class="all text-center">Image</th>
                     <th class="all text-center">Name</th>
                     <th class="text-center">Tuppers</th>
                     <th class="desktop text-center">Type</th>
@@ -16,7 +17,8 @@
             </thead>
             <tbody>            
                 <tr>
-                    <td><a></a></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -50,18 +52,36 @@
                         }
                     },
                     serverSide: true,
-                    ajax: "/Dish/Returndata",
+                    ajax: '@Url.Action("Returndata", "Dish")',
                     "sServerMethod": "POST",
                     "sAjaxDataProp": "filteredData",
-                    "aoColumnDefs": [{
-                        "aTargets": [4],
+                    "aoColumnDefs": [ {
+                        "aTargets": [0],
+                        "mData": "imageSrc",
+                        orderable: false,
+                        "mRender": function (data, type, row) {
+                                    if(data == undefined || data == null || data == ""){
+                                        data = "http://placehold.it/50x30";
+                                    }
+                                    return '<img src="' + data + '" width="50px" height="38px">';
+                                }
+                            },{
+                        "aTargets": [5],
                         "mData": "id",
                         orderable: false,
-                        "mRender": function (data, type, full) {
-                            return '<a href="/Dish/Edit/' + data + '">Edit</a>';
+                        "mRender": function (data, type, row) {
+                            return '<a href="@Url.Action("Edit", "Dish")/' + data + '">Edit</a>';
                             }
-                    }],
-                    "aoColumns": [                                     
+                        }, {
+                        "aTargets": [1],
+                        "mData": "name",
+                        "mRender": function (data, type, row) {
+                            return '<a href="@Url.Action("View", "Dish")/' + row.id + '" class="not-underlined">' + data + '</a>';
+                        }
+                    }
+                    ],
+                    "aoColumns": [
+                                    { "mData": "imageSrc" },
                                     { "mData": "name" },
                                     { "mData": "tuppers" },
                                     { "mData": "type" },

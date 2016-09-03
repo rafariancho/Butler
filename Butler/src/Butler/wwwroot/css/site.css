@@ -37,6 +37,11 @@ textarea {
 
 .top-spaced { margin-top:20px; }
 
+table a.not-underlined, .table a.not-underlined
+ {
+    text-decoration:none !important;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
   /* Hide captions */
