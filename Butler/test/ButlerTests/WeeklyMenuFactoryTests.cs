@@ -77,12 +77,22 @@ namespace ButlerTests
         }
 
         [Test]
-        public void ShouldGenerateWeeklyMenuHasTwoLunchesWith4TuppersAtLeast()
+        public void ShouldGenerateWeeklyMenuThatHasTwoLunchesWith4TuppersAtLeast()
         {
             IWeeklyMenuFactory factory = new WeeklyMenuFactory(_repository);
 
             var result = factory.GetWeeklyMenu();
             Assert.That(result.Where(x => x.Menu.Lunch.Tuppers > 2).Count(), Is.GreaterThanOrEqualTo(2));
+        }
+
+        [Test]
+        public void ShouldEnsureThatTwo4TupperLunchesRepeatInTheWeeklyMenu()
+        {
+            IWeeklyMenuFactory factory = new WeeklyMenuFactory(_repository);
+
+            var result = factory.GetWeeklyMenu();
+            Assert.That(result.Where(x => x.Menu.Lunch.Tuppers > 2 && x.Menu.Lunch.Id == result[0].Menu.Lunch.Id).Count(), Is.GreaterThanOrEqualTo(2));
+            Assert.That(result.Where(x => x.Menu.Lunch.Tuppers > 2 && x.Menu.Lunch.Id == result[1].Menu.Lunch.Id).Count(), Is.GreaterThanOrEqualTo(2));
         }
 
         private List<Dish> CreateDishes(int maxMenus)
