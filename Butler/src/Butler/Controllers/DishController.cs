@@ -43,12 +43,16 @@ namespace Butler.Controllers
                     filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Name) : filteredData.OrderByDescending(x => x.Name); break;
                 case 2:
                     filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Tuppers) : filteredData.OrderByDescending(x => x.Tuppers); break;
+                case 3:
+                    filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Type) : filteredData.OrderByDescending(x => x.Type); break;
+                case 4:
+                    filteredData = request.Order[0]?.Dir == "asc" ? filteredData.OrderBy(x => x.Consistency) : filteredData.OrderByDescending(x => x.Consistency); break;
                 default:
                     filteredData = filteredData.OrderByDescending(x => x.Name);
                     break;
             }
 
-            return Json(new DataTablesResponse(request.Draw, filteredData, filteredData.Count(), _repository.GetDishesCount()));
+            return Json(new DataTablesResponse(request.Draw, filteredData, _repository.GetDishesCount(), filteredData.Count()));
         }
 
         public IActionResult Edit()

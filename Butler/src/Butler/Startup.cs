@@ -44,7 +44,7 @@ namespace Butler
             //services.AddDbContext<ButlerContext>(options => options.UseSqlServer(connection));            
             services.AddDbContext<ButlerContext>(options => options.UseSqlServer(Configuration["database:connection"]));
             services.AddMvc();
-            services.AddScoped<IWeeklyMenuFactory, FakeWeeklyMenuFactory>();
+            services.AddScoped<IWeeklyMenuFactory, WeeklyMenuFactory>();
             services.AddScoped<IRepository, Repositories.Repository>();
         }
 
