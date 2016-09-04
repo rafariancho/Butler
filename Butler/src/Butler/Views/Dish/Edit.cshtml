@@ -47,6 +47,7 @@
             <label for="textArea">Preparation method</label>
             <textarea class="form-control" name="Description" rows="5" id="textArea">@Model.Description</textarea>
             <span class="help-block">Enter the ingredients and how the preparation method.</span>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
     </div>
     <div class="row col-md-12">

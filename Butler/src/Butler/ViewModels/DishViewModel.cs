@@ -14,7 +14,7 @@ namespace Butler.ViewModels
         public List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> DishTypes { set; get; }  
         public List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ConsistencyTypes { set; get; }  
         [Required]
-        [StringLength(100, MinimumLength = 20,ErrorMessage = "Name must be 20 to 100 characters long")]
+        [StringLength(100, MinimumLength = 5,ErrorMessage = "Name must be 5 to 100 characters long")]
         public String Name { get; set; }
         [Required]
         public int Tuppers { get; set; }

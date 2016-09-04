@@ -33,6 +33,8 @@
             $(document).ready(function () {
                 $('#DishesTable').dataTable({
                     "dom": "frtip",
+                    'bPaginate': true,
+                    'iDisplayLength': 5,
                     responsive: {
                         details: {
                             renderer: function (api, rowIdx, columns) {
