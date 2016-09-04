@@ -25,7 +25,7 @@
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -45,14 +45,14 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container-fluid body-bg">
         <br />
         @RenderBody()
         <hr />
     </div>
     <footer class="navbar navbar-default navbar-fixed-bottom">
         <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">&copy; 2016 - Butler</a>
-</footer>
+    </footer>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

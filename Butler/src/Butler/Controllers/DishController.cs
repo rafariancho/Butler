@@ -58,6 +58,17 @@ namespace Butler.Controllers
             return View(model);
         }
 
+        [Route("/Dish/View/{id}")]
+        [HttpGet]
+        public IActionResult View(int id)
+        {
+            var dish = _repository.GetDish(id);
+            DishViewModel model = new DishViewModel();
+            model.Map(dish);
+            InitializeModel(model, model.Consistency, model.Type);
+            return View(model);
+        }
+
         [Route("/Dish/Edit/{id}")]
         [HttpGet]
         public IActionResult Edit(int id)
