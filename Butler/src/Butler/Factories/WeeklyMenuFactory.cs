@@ -29,12 +29,16 @@ namespace Butler.Factories
                 //If i > 0 check if menu is repeating 
                 var lunchQuery =  i>0 ? lunches.SkipWhile(x => x.Id == menus[i-1].Lunch.Id): lunches;
 
-                ////Check that the lunch is not repeting more than twice
-                //while (menus.Where(x => x.Lunch.Id == lunchQuery.FirstOrDefault().Id).Count() > 2) {
-                //    lunchQuery = lunchQuery.SkipWhile(x => x.Id == lunchQuery.FirstOrDefault().Id);
-                //}
+                //Check that the lunch is not repeting more than twice
+                var currentLunchId = lunchQuery.FirstOrDefault().Id;
+                int iCount = i;
+                while ((menus.Where(x => x.Lunch.Id == currentLunchId).Count() >= 2) && (iCount > 0))
+                {
+                    lunchQuery = lunchQuery.SkipWhile(x => x.Id == currentLunchId);
+                    iCount--;
+                } 
 
-                var lunch =lunchQuery.FirstOrDefault();
+                var lunch = lunchQuery.FirstOrDefault();
                 var dinner = dinners.Skip(i).FirstOrDefault();
 
                 Menu menu = new Menu() { Lunch = lunch, Dinner = dinner };
@@ -42,13 +46,6 @@ namespace Butler.Factories
                 DayOfWeek day = ((DayOfWeek)i + 1);
                 weeklyMenu.Add(new DailyMenu() { Day = day.ToString(), Menu = menu });
             }
-            //weeklyMenu.Add(new DailyMenu() { Day = "Monday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Tuesday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Wednesday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Thursday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Friday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Saturday", Menu = menu });
-            //weeklyMenu.Add(new DailyMenu() { Day = "Sunday", Menu = menu });
             return weeklyMenu;
         }
     }
