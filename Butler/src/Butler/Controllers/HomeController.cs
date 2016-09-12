@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Butler.Models;
 using Butler.Interfaces;
+using Butler.Extensions;
 
 namespace Butler.Controllers
 {
@@ -16,11 +17,23 @@ namespace Butler.Controllers
         {
             _weeklyMenuFactory = weeklyMenuFactory;
         }
+
+        //http://benjii.me/2015/07/using-sessions-and-httpcontext-in-aspnet5-and-mvc6/
         public IActionResult Index()
-        {   
-            return View(_weeklyMenuFactory.GetWeeklyMenu());
+        {
+            if (HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek") != null)
+            {
+                HttpContext.Session.SetObjectAsJson("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
+            }
+            return View(HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek"));
         }
         
+        public IActionResult NewCurrentMenu()
+        {
+            HttpContext.Session.SetObjectAsJson("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
+            return View(HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek"));
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
