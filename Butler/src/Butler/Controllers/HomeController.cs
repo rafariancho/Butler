@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Butler.Models;
 using Butler.Interfaces;
 using Butler.Extensions;
@@ -12,26 +13,31 @@ namespace Butler.Controllers
     public class HomeController : Controller
     {
         private IWeeklyMenuFactory _weeklyMenuFactory;
+        private IPersistUserData _userData;
 
-        public HomeController(IWeeklyMenuFactory weeklyMenuFactory)
+        public HomeController(IWeeklyMenuFactory weeklyMenuFactory, IPersistUserData userData)
         {
             _weeklyMenuFactory = weeklyMenuFactory;
+            _userData = userData;
         }
-
-        //http://benjii.me/2015/07/using-sessions-and-httpcontext-in-aspnet5-and-mvc6/
+        
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek") != null)
+            _userData.Session = HttpContext.Session;
+
+            if (!_userData.ExistsCurrentWeeksMenu("CurrentWeek"))
             {
-                HttpContext.Session.SetObjectAsJson("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
+                _userData.StoreCurrentWeeksMenu("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
             }
-            return View(HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek"));
+            return View(_userData.GetCurrentWeeksMenu("CurrentWeek"));
         }
         
         public IActionResult NewCurrentMenu()
         {
-            HttpContext.Session.SetObjectAsJson("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
-            return View(HttpContext.Session.GetObjectFromJson<List<DailyMenu>>("CurrentWeek"));
+            _userData.Session = HttpContext.Session;
+
+            _userData.StoreCurrentWeeksMenu("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
+            return View("Index", _userData.GetCurrentWeeksMenu("CurrentWeek"));
         }
 
         public IActionResult About()

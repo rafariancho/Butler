@@ -11,6 +11,7 @@ using Butler.Interfaces;
 using Butler.Factories;
 using Butler.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace Butler
 {
@@ -39,13 +40,16 @@ namespace Butler
         {
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
-
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=ButlerDb;Trusted_Connection=True;";
-            //services.AddDbContext<ButlerContext>(options => options.UseSqlServer(connection));            
+          
             services.AddDbContext<ButlerContext>(options => options.UseSqlServer(Configuration["database:connection"]));
             services.AddMvc();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.CookieName = ".MyApplication";
+            }); 
             services.AddScoped<IWeeklyMenuFactory, WeeklyMenuFactory>();
             services.AddScoped<IRepository, Repositories.Repository>();
+            services.AddScoped<IPersistUserData, Repositories.UserData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +74,7 @@ namespace Butler
 
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
