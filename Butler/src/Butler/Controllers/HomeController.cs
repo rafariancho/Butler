@@ -40,6 +40,22 @@ namespace Butler.Controllers
             return View("Index", _userData.GetCurrentWeeksMenu("CurrentWeek"));
         }
 
+        public IActionResult NewDish(int id)
+        {
+            _userData.Session = HttpContext.Session;
+
+            //var menu = _userData.GetCurrentWeeksMenu("CurrentWeek");
+            //var dish = getRandomDish(menu);
+            //foreach (var lunch in menu.Where(x => x.Menu.Lunch.Id == id))
+            //{
+            //    lunch = dish;
+            //}
+
+            //_userData.StoreCurrentWeeksMenu("CurrentWeek", menu);
+            
+            return View("Index", _userData.GetCurrentWeeksMenu("CurrentWeek"));
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
