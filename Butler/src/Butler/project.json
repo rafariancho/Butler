@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     //"NETStandard.Library": "1.6.0",
     "Microsoft.NETCore.App": {
@@ -33,7 +33,9 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "DataTables.AspNet.Core": "2.0.0"
+    "DataTables.AspNet.Core": "2.0.0",
+    "Microsoft.AspNetCore.Session": "1.0.0",
+    "Microsoft.Extensions.Caching.Memory": "1.0.0"
   },
 
   "tools": {

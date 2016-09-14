@@ -9,8 +9,9 @@ My current week.
     {
         <div class="col-lg-2">
             <h2>@menu.Day</h2>
-            <div>@menu.Menu.Lunch.Name</div>
-            <div>@menu.Menu.Dinner.Name</div>
+            <div><a href="@Url.Action("Edit", "Dish")/@menu.Menu.Lunch.Id">@menu.Menu.Lunch.Name</a></div>
+            <div><a href="@Url.Action("Edit", "Dish")/@menu.Menu.Dinner.Id">@menu.Menu.Dinner.Name</a></div>
         </div>
     }
 </div>
+<a asp-action="NewCurrentMenu" asp-controller="home">New weekly menu</a>
