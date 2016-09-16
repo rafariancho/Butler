@@ -116,6 +116,9 @@ table a.not-underlined, .table a.not-underlined
         width: 100%;
         *width: 100%;
     }
+    #DishesTable_filter{
+        text-align:right;
+    }
 }
 
 @media (min-width: 992px) {
