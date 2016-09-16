@@ -89,7 +89,7 @@ namespace ButlerTests
 
             var indexResult = homeController.NewDish(_userData.GetCurrentWeeksMenu().First().Menu.Lunch.Id) as ViewResult;
 
-            Assert.That(indexResult.Model, Is.Not.Null);
+            Assert.That(_userData.GetCurrentWeeksMenu(), Is.Not.Null);
         }
 
         [Test]
@@ -101,7 +101,8 @@ namespace ButlerTests
 
             var indexResult = homeController.NewDish(_userData.GetCurrentWeeksMenu().First().Menu.Lunch.Id) as ViewResult;
 
-            Assert.That(indexResult.Model, Is.InstanceOf(typeof(List<Butler.Models.DailyMenu>)));
+            Assert.That(_userData.GetCurrentWeeksMenu(), Is.InstanceOf(typeof(List<Butler.Models.DailyMenu>)));
+            Assert.That(((List<DailyMenu>)_userData.GetCurrentWeeksMenu()).Count, Is.EqualTo(7));
         }    
 
         [Test]
@@ -114,7 +115,7 @@ namespace ButlerTests
 
             var indexResult = homeController.NewDish(lunchId) as ViewResult;
 
-            Assert.That(((List<DailyMenu>)indexResult.Model).First().Menu.Lunch.Id, Is.Not.EqualTo(lunchId));
+            Assert.That(((List<DailyMenu>)_userData.GetCurrentWeeksMenu()).First().Menu.Lunch.Id, Is.Not.EqualTo(lunchId));
         } 
     }
 }

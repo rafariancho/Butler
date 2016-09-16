@@ -76,6 +76,11 @@ namespace Butler.Repositories
             return _context.Dishes.Count();
         }
 
+        public int GetDishesCount(Models.Type mealType)
+        {
+            return _context.Dishes.Where(x => x.Type == mealType).Count();
+        }
+
         public IEnumerable<Product> GetProducts()
         {
             return _context.Products;

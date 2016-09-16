@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Butler.Interfaces;
 using Butler.Models;
+using System.Linq;
 
 namespace ButlerTests.Fakes
 {
@@ -97,6 +98,11 @@ namespace ButlerTests.Fakes
         public void UpdateProduct(Product product)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetDishesCount(Butler.Models.Type mealType)
+        {
+            return _list.Where(x => x.Type == mealType).Count();
         }
     }
 }

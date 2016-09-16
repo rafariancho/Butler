@@ -13,6 +13,7 @@ namespace Butler.Interfaces
         IEnumerable<Dish> GetDishes(string search, int start, int pagesize);
         Dish GetDish(int id);
         int GetDishesCount();
+        int GetDishesCount(Models.Type mealType);
         IEnumerable<Product> GetProducts();
         void AddDish(Dish dish);
         void UpdateDish(Dish dish);

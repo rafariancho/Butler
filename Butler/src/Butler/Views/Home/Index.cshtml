@@ -10,9 +10,24 @@
     {
         <div class="col-md-1">
             <h2>@menu.Day</h2>
-            <h4 class="lunch"><a href="@Url.Action("View", "Dish")/@menu.Menu.Lunch.Id">@menu.Menu.Lunch.Name</a></h4>
+            <h4 class="lunch">
+                @if (menu.Menu.Lunch.Id != -1) { 
+                    <a href="@Url.Action("View", "Dish")/@menu.Menu.Lunch.Id">@menu.Menu.Lunch.Name</a>
+                }else{
+                    @menu.Menu.Lunch.Name
+                }
+            </h4>
             <div class="row dishIcons"><a asp-action="NewDish" asp-controller="home" asp-route-id="@menu.Menu.Lunch.Id"><span class="glyphicon glyphicon-refresh"></span></a></div>
-            <h4 class="dinner"><a href="@Url.Action("View", "Dish")/@menu.Menu.Dinner.Id">@menu.Menu.Dinner.Name</a></h4>
+            <h4 class="dinner">
+                @if (menu.Menu.Lunch.Id != -1)
+                {
+                    <a href="@Url.Action("View", "Dish")/@menu.Menu.Dinner.Id">@menu.Menu.Dinner.Name</a>
+                }
+                else
+                {
+                    @menu.Menu.Lunch.Name
+                }
+            </h4>
         </div>
     }
 </div>
