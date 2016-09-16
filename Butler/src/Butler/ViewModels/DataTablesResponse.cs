@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Butler.Models;
 
-namespace Butler.Controllers
+namespace Butler.Interfaces
 {
     internal class DataTablesResponse
     {

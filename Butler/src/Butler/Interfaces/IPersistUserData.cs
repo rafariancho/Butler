@@ -8,8 +8,8 @@ namespace Butler.Interfaces
     {
         ISession Session { get; set; }
 
-        List<DailyMenu> GetCurrentWeeksMenu(string key);
-        void StoreCurrentWeeksMenu(string key, List<DailyMenu> value);
-        bool ExistsCurrentWeeksMenu(string key);
+        List<DailyMenu> GetCurrentWeeksMenu();
+        void StoreCurrentWeeksMenu( List<DailyMenu> value);
+        bool ExistsCurrentWeeksMenu();
     }
 }

@@ -48,6 +48,7 @@ namespace Butler
                 options.CookieName = ".MyApplication";
             }); 
             services.AddScoped<IWeeklyMenuFactory, WeeklyMenuFactory>();
+            services.AddScoped<IDishFactory, DishFactory>();
             services.AddScoped<IRepository, Repositories.Repository>();
             services.AddScoped<IPersistUserData, Repositories.UserData>();
         }

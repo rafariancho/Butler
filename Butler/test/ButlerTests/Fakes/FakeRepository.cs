@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Butler.Interfaces;
 using Butler.Models;
 
-namespace ButlerTests
+namespace ButlerTests.Fakes
 {
     internal class FakeRepository : IRepository
     {

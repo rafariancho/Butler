@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Butler.Interfaces;
 using System;
-using DataTables.AspNet.Core;
 using System.Linq;
 using Butler.Extensions;
 using Butler.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Butler.Controllers
+namespace Butler
 {
     public class DishController : Controller
     {

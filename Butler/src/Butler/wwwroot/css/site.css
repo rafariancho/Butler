@@ -47,6 +47,32 @@ textarea {
 .jumboImg {
     max-height:80px;
 }
+
+.lunch, .dinner {
+    padding:10px;
+    padding-left:5px;
+}
+
+.lunch a, .dinner a {
+    color: #888;
+}
+
+.dishIcons {
+    text-decoration:none;
+    margin-left:10px;
+    margin-right:10px;
+    border-bottom:1px solid #e6e6e6;
+}
+
+.monsterTitle {
+    padding-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color:#1a6ecc;
+    border-bottom: 5px solid #EFEFEF;
+}
+
+
 html, 
 body {
     height: 100%;
@@ -84,6 +110,21 @@ table a.not-underlined, .table a.not-underlined
     .label{
         font-size:100%;
     }
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1  {
+        width: 100%;
+        *width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+  .seven-cols .col-md-1,
+  .seven-cols .col-sm-1,
+  .seven-cols .col-lg-1 {
+    width: 14.285714285714285714285714285714%;
+    *width: 14.285714285714285714285714285714%;
+  }
 }
 
 
@@ -99,6 +140,20 @@ table a.not-underlined, .table a.not-underlined
     }
     .label{
         font-size:130%;
+    }
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1 {
+        font-size:120%;
+    }
+    .seven-cols .col-md-1 h2 {
+        font-size:280%;
+    }
+    h1 {
+        font-size:550%;
+    }
+    .seven-cols .col-md-1 h4 {
+        font-size:150%;
     }
 }
 
