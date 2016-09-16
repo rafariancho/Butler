@@ -13,27 +13,28 @@
     <div class="jumbotron jumboImg" style="background-color:inherit;"><h1 class="dishJumbo">@Model.Name</h1> </div>
     <div class="container-fluid top-spaced visible-xs-block"><h1 class="dishJumbo">@Model.Name</h1></div>
 
-    <div class="media col-lg-3 col-lg-offset-1 col-md-4 col-sm-12 top-Clipped20">
+    <div class="media col-lg-4 col-md-4 col-sm-12">
         <div class="media-left">
             <a href="#">
-                @if (Model.ImageSrc == null)
-                {
-                    <img id="imgDish" class="media-object" src="http://placehold.it/345x256/449955/FFF" width="345" height="256">
-                }
-                else
+                @if (Model.ImageSrc != null)
                 {
                     <img id="imgDish" class="media-object" src="@Model.ImageSrc">
                 }
             </a>
         </div>
-        <div class="col-lg-12 col-lg-offset-2 col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-1 top-spaced bottom-spaced">
-            <span class="label label-primary">@Model.Tuppers Tuppers</span>
-            <span class="label label-info">@Model.Type</span>
-            <span class="label label-warning">@Model.Consistency</span>
-        </div>
+        @*<div class="col-lg-12 col-lg-offset-2 col-md-12 col-md-offset-2 col-xs-12 col-xs-offset-1 top-spaced bottom-spaced">*@
+            <div class="row top-spaced bottom-spaced">
+                <div class="butler-badges"></div>
+                <div class="butler-badges">
+                    <span class="label label-primary">@Model.Tuppers Tuppers</span>
+                    <span class="label label-info">@Model.Type</span>
+                    <span class="label label-warning">@Model.Consistency</span>
+                </div>
+                <div class="butler-badges"></div>
+            </div>
     </div>
-    <div class="col-lg-3 col-md-7 col-xs-12">
-        <div class="panel panel-success">
+    <div class="col-lg-3 col-md-7 col-xs-12 panel-butler">
+        <div class="panel panel-success all-height">
             <div class="panel-heading">
                 <h3 class="panel-title">Ingredients</h3>
             </div>
@@ -42,8 +43,8 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5 col-md-7 col-xs-12">
-        <div class="panel panel-primary">
+    <div class="col-lg-5 col-md-7 col-xs-12 panel-butler">
+        <div class="panel panel-primary all-height">
             <div class="panel-heading">
                 <h3 class="panel-title">Preparation method</h3>
             </div>
