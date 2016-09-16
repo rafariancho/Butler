@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using Butler.Models;
 using Butler.Interfaces;
-using Butler.Extensions;
 
-namespace Butler.Controllers
+namespace Butler
 {
     public class HomeController : Controller
     {
         private IWeeklyMenuFactory _weeklyMenuFactory;
         private IPersistUserData _userData;
+        private IDishFactory _dishFactory;
 
-        public HomeController(IWeeklyMenuFactory weeklyMenuFactory, IPersistUserData userData)
+        public HomeController(IWeeklyMenuFactory weeklyMenuFactory, IDishFactory dishFactory, IPersistUserData userData)
         {
             _weeklyMenuFactory = weeklyMenuFactory;
+            _dishFactory = dishFactory;
             _userData = userData;
         }
         
@@ -25,35 +22,37 @@ namespace Butler.Controllers
         {
             _userData.Session = HttpContext.Session;
 
-            if (!_userData.ExistsCurrentWeeksMenu("CurrentWeek"))
+            if (!_userData.ExistsCurrentWeeksMenu())
             {
-                _userData.StoreCurrentWeeksMenu("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
+                _userData.StoreCurrentWeeksMenu( _weeklyMenuFactory.GetWeeklyMenu());
             }
-            return View(_userData.GetCurrentWeeksMenu("CurrentWeek"));
+            return View(_userData.GetCurrentWeeksMenu());
         }
         
         public IActionResult NewCurrentMenu()
         {
             _userData.Session = HttpContext.Session;
 
-            _userData.StoreCurrentWeeksMenu("CurrentWeek", _weeklyMenuFactory.GetWeeklyMenu());
-            return View("Index", _userData.GetCurrentWeeksMenu("CurrentWeek"));
+            _userData.StoreCurrentWeeksMenu(_weeklyMenuFactory.GetWeeklyMenu());
+            return View("Index", _userData.GetCurrentWeeksMenu());
         }
 
         public IActionResult NewDish(int id)
         {
             _userData.Session = HttpContext.Session;
 
-            //var menu = _userData.GetCurrentWeeksMenu("CurrentWeek");
-            //var dish = getRandomDish(menu);
-            //foreach (var lunch in menu.Where(x => x.Menu.Lunch.Id == id))
-            //{
-            //    lunch = dish;
-            //}
+            var menu = _userData.GetCurrentWeeksMenu();
+            var lunches = menu.Select(x => x.Menu.Lunch).ToList();
+            var dish = _dishFactory.GetRandomDish(lunches, Models.Type.Lunch, menu.Where(x => x.Menu.Lunch?.Id == id).Count() * 2);
+            foreach (var dailyMenu in menu.Where(x => x.Menu.Lunch?.Id == id))
+            {
+                dailyMenu.Menu.Lunch = dish;
+            }
 
-            //_userData.StoreCurrentWeeksMenu("CurrentWeek", menu);
-            
-            return View("Index", _userData.GetCurrentWeeksMenu("CurrentWeek"));
+            _userData.StoreCurrentWeeksMenu( menu);
+
+            //return View("Index", _userData.GetCurrentWeeksMenu());
+            return RedirectToAction("Index");
         }
 
         public IActionResult About()

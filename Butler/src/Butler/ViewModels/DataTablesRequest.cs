@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using DataTables.AspNet.Core;
 
-namespace Butler.Controllers
+namespace Butler.Interfaces
 {
     public class DataTableParameters
     {

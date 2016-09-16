@@ -8,6 +8,7 @@ using Butler.Interfaces;
 using Butler.Factories;
 using Butler.Repositories;
 using Butler.Models;
+using ButlerTests.Fakes;
 
 namespace ButlerTests
 {

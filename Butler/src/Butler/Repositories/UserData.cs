@@ -26,22 +26,21 @@ namespace Butler.Repositories
             }
         }
 
-
         public UserData(){}
 
-        public bool ExistsCurrentWeeksMenu(string key)
+        public bool ExistsCurrentWeeksMenu()
         {
-            return Session.GetObjectFromJson<List<DailyMenu>>(key) != null;
+            return Session.GetObjectFromJson<List<DailyMenu>>(Session.Id) != null;
         }
 
-        public List<DailyMenu> GetCurrentWeeksMenu(string key)
+        public List<DailyMenu> GetCurrentWeeksMenu()
         {
-            return Session.GetObjectFromJson<List<DailyMenu>>(key);
+            return Session.GetObjectFromJson<List<DailyMenu>>(Session.Id);
         }
 
-        public void StoreCurrentWeeksMenu(string key, List<DailyMenu> value)
+        public void StoreCurrentWeeksMenu(List<DailyMenu> value)
         {
-            Session.SetObjectAsJson(key, value);
+            Session.SetObjectAsJson(Session.Id, value);
         }
     }
 }

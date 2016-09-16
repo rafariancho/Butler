@@ -5,9 +5,9 @@ using Butler.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace ButlerTests
+namespace ButlerTests.Fakes
 {
-    internal class userDataFake : IPersistUserData
+    internal class FakeUserData : IPersistUserData
     {
         public ISession Session
         {
@@ -16,20 +16,22 @@ namespace ButlerTests
         }
 
         private Dictionary<string, string> sessionFake = new Dictionary<string, string>();
+        public string sessionId;
 
-        public bool ExistsCurrentWeeksMenu(string key)
+        public bool ExistsCurrentWeeksMenu()
         {
-            return sessionFake.GetObjectFromJson<List<DailyMenu>>(key) != null;
+            return sessionFake.GetObjectFromJson<List<DailyMenu>>(sessionId) != null;
         }
 
-        public List<DailyMenu> GetCurrentWeeksMenu(string key)
+        public List<DailyMenu> GetCurrentWeeksMenu()
         {
-            return sessionFake.GetObjectFromJson<List<DailyMenu>>(key);
+            return sessionFake.GetObjectFromJson<List<DailyMenu>>(sessionId);
         }
 
-        public void StoreCurrentWeeksMenu(string key, List<DailyMenu> value)
+        public void StoreCurrentWeeksMenu( List<DailyMenu> value)
         {
-            sessionFake.SetObjectAsJson(key, value);
+            sessionFake.Remove(sessionId);
+            sessionFake.SetObjectAsJson(sessionId, value);
         }        
     }
 
