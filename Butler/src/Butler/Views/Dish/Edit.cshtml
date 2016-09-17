@@ -1,4 +1,7 @@
 ﻿@model Butler.ViewModels.DishViewModel
+@{
+    ViewData["Title"] = @Model.Name;
+}
 
 <form id="dishForm" asp-controller="Dish" asp-action="Edit" class="row" method="post" enctype="multipart/form-data">
     <div class="media col-md-4 col-sm-12">

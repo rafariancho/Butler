@@ -1,5 +1,7 @@
 ﻿html {
     background-color: #FEFEFE;
+    padding: 0px;
+    margin: 0px;
 }
 body {
     padding-top: 50px;
@@ -8,6 +10,7 @@ body {
 
 footer.navbar-default {
     background-color:#000;
+    margin-bottom:0px;
 }
 
 /* Wrapping element */
@@ -125,6 +128,10 @@ table a.not-underlined, .table a.not-underlined
     .carousel-caption {
         display: none
     }
+    footer.navbar-fixed-bottom {
+        position:relative;
+    }
+
     .jumboImg {
         display:none;
     }
@@ -161,6 +168,11 @@ table a.not-underlined, .table a.not-underlined
     .butler-badges {
         margin-left:20px;
     }
+    
+    footer.navbar-fixed-bottom {
+        position:relative;
+    }
+
     /* home page */
   .seven-cols .col-md-1,
   .seven-cols .col-sm-1,
@@ -199,6 +211,9 @@ table a.not-underlined, .table a.not-underlined
     .label{
         font-size:130%;
     }
+    footer.navbar-fixed-bottom {
+        position:fixed;
+    }
     /* home page */
     .seven-cols .col-md-1,
     .seven-cols .col-sm-1,
@@ -215,12 +230,12 @@ table a.not-underlined, .table a.not-underlined
         font-size:150%;
     }
     
-    .butler-badges {
+    /*.butler-badges {
         min-width: 33.333333333333333%;
         width: 33.33%;
         height: 30px;
         float: left;
         margin-left:0px;
-    }
+    }*/
 }
 

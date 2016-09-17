@@ -1,9 +1,22 @@
 ﻿@model IEnumerable<Butler.Models.Dish>
+@{
+    ViewData["Title"] = "Dishes";
+}
+<style>
+    .body-bg {
+        padding-top: 10px;
+        background-image: url('/images/background.jpg');
+        background-position-y: 110px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100%;
+        overflow: auto;
+    }
+</style>
+<div class="jumbotron jumboImg" style="background-color:inherit;"><h1 class="dishJumbo">Dishes</h1> </div>
+<div class="container-fluid top-spaced visible-xs-block"><h1 class="dishJumbo">Dishes</h1></div>
 <div class="row">
-    <div class="col-md-6 col-md-offset-1 col-sm-6">
-        <a asp-area="" asp-controller="Dish" asp-action="Edit" class="btn btn-primary">New dish</a>
-    </div>
-    <div class="col-md-10 col-md-offset-1 col-sm-10 top-spaced">
+    <div class="col-md-10 col-md-offset-1 col-sm-10 top-spaced well well-lg">
         <table id="DishesTable" class="table table-striped" cellspacing="0" width="100%">
             <thead class="bg-primary">
                 <tr>
@@ -27,7 +40,12 @@
             </tbody>
         </table>
     </div>
+    <div class="col-md-6 col-md-offset-1 col-sm-6 bottom-spaced">
+        <a asp-area="" asp-controller="Dish" asp-action="Edit" class="btn btn-success">New dish</a>
+    </div>
 </div>
+
+
     @section scripts{
         <script>
             $(document).ready(function () {
